@@ -1,3 +1,4 @@
+# Docker-criterion
 
 Docker container to run tests with [Criterion test framework](https://github.com/Snaipe/Criterion) (a test framework for `C` language).
 
