@@ -3,10 +3,15 @@ Docker container to run test with [Criterion test framework](https://github.com/
 
 # Requirements
 
-* `docker`
-* `criterion` library (optional) :
+* [`docker`](https://docs.docker.com/engine/installation/) engine ;
 
-        curl --output release.zip https://github.com/Snaipe/Criterion/archive/bleeding.zip
-        docker build -t tdd-c .
-        docker run -it tdd-c
+## Usage
 
+1. Write your tests in `sample.c` (default) ;
+1. Setup the building environment:
+
+        docker build -t test-my-c .
+        
+1. Run the tests:
+
+        docker run -v $(pwd)/tests:/tests -t test-my-c 
