@@ -21,6 +21,6 @@ WORKDIR /tests
 
 ENV TEST_FILE=sample
 CMD gcc \
-        -o $TEST_FILE $TEST_FILE.c \
+        -o build/$TEST_FILE $TEST_FILE.c \
         -lcriterion \
-    && /tests/$TEST_FILE
+    && build/$TEST_FILE
