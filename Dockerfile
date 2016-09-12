@@ -1,21 +1,26 @@
 FROM gcc:latest
 
-ARG ZIP_FILE=release.zip
-
-COPY ${ZIP_FILE} /app/
 RUN apt-get update \
-    && apt-get install --yes --force-yes --no-install-recommends --no-install-suggests \
-        unzip
+    && apt-get install -y g++ cmake git
 
-WORKDIR /app/${ZIP_FILE}
-RUN unzip ${ZIP_FILE}
-#ENV LD_LIBRARY_PATH /app/criterion/lib
+RUN git clone --depth 1 --branch=master https://github.com/Snaipe/Criterion \
+    && cd Criterion \
+    && mkdir build \
+    && cd build \
+    && cmake \
+            .. \
+            -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+            -DCMAKE_INSTALL_PREFIX=/usr \
+            -DCMAKE_INSTALL_LIBDIR=lib \
+    && make \
+    && make install \
+    && cd ../../ && rm -Rf Criterion
 
-COPY test.c /app/
-RUN gcc \
-    -o test test.c \
-    -L/app/criterion/lib \
-    -lcriterion \
-    -I /app/criterion/include/criterion
+VOLUME /tests
+WORKDIR /tests
 
-CMD ["./test"]
+ENV TEST_FILE=sample
+CMD gcc \
+        -o $TEST_FILE $TEST_FILE.c \
+        -lcriterion \
+    && /tests/$TEST_FILE
