@@ -1,5 +1,5 @@
 
-Docker container to run test with [Criterion test framework](https://github.com/Snaipe/Criterion) (a test framework for C language).
+Docker container to run tests with [Criterion test framework](https://github.com/Snaipe/Criterion) (a test framework for `C` language).
 
 # Requirements
 
@@ -7,11 +7,11 @@ Docker container to run test with [Criterion test framework](https://github.com/
 
 ## Usage
 
-1. Write your tests in `sample.c` (default) ;
+1. Write your tests in `tests/sample.c` (default) ;
 1. Setup the building environment:
 
         docker build -t test-my-c .
         
 1. Run the tests:
 
-        docker run -v $(pwd)/tests:/tests -t test-my-c 
+        docker run -v $(pwd)/tests:/tests -t test-my-c
